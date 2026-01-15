@@ -1,0 +1,769 @@
+<mxfile host="app.diagrams.net" modified="2026-01-15T00:00:00.000Z" agent="Claude" version="24.0.0" etag="GramSeva_Workflow_v1" type="device">
+  <diagram name="Tele-Consultation Workflow" id="workflow-diagram">
+    <mxGraphModel dx="2800" dy="1800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="4000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="GramSeva Health - Assisted Tele-Consultation Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=26;fontStyle=1;fontColor=#1A237E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="900" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="End-to-End Patient Journey with Offline-First Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#424242;" vertex="1" parent="1">
+          <mxGeometry x="400" y="70" width="900" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ========== SWIMLANES ========== -->
+
+        <!-- Swimlane 1: Patient -->
+        <mxCell id="swimlane-patient" value="PATIENT" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=14;fontStyle=1;swimlaneFillColor=#FFEBEE;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="2560" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 2: Sahayak -->
+        <mxCell id="swimlane-sahayak" value="SAHAYAK (Health Kiosk Operator)" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;fontSize=14;fontStyle=1;swimlaneFillColor=#E3F2FD;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="2560" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 3: Kiosk Application -->
+        <mxCell id="swimlane-kiosk" value="KIOSK APPLICATION" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;fontSize=14;fontStyle=1;swimlaneFillColor=#E8EAF6;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="2560" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 4: Consent & Identity Service -->
+        <mxCell id="swimlane-consent" value="CONSENT &amp; IDENTITY SERVICE" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;fontSize=14;fontStyle=1;swimlaneFillColor=#FFF3E0;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="760" width="2560" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 5: AI Triage & Translation Service -->
+        <mxCell id="swimlane-ai" value="AI TRIAGE &amp; TRANSLATION SERVICE" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#FFE082;strokeColor=#F57C00;fontSize=14;fontStyle=1;swimlaneFillColor=#FFF9C4;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="940" width="2560" height="220" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 6: Doctor Portal -->
+        <mxCell id="swimlane-doctor" value="DOCTOR PORTAL" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;fontSize=14;fontStyle=1;swimlaneFillColor=#F3E5F5;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1160" width="2560" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 7: Prescription & Pharmacy System -->
+        <mxCell id="swimlane-pharmacy" value="PRESCRIPTION &amp; PHARMACY SYSTEM" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;fontSize=14;fontStyle=1;swimlaneFillColor=#E8F5E9;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1420" width="2560" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 8: Offline Sync & Cloud EMR -->
+        <mxCell id="swimlane-sync" value="OFFLINE SYNC &amp; CLOUD EMR" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;fontSize=14;fontStyle=1;swimlaneFillColor=#E0F2F1;startSize=40;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1660" width="2560" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- ========== PATIENT SWIMLANE ACTIVITIES ========== -->
+
+        <!-- Start Event -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#4CAF50;strokeColor=#2E7D32;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="90" y="185" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="start-label" value="START" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="240" width="60" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Patient Arrives -->
+        <mxCell id="patient-arrives" value="Patient arrives at Health Kiosk" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Patient Explains Symptoms -->
+        <mxCell id="patient-symptoms" value="Patient explains symptoms in local language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Patient in Video Call -->
+        <mxCell id="patient-video" value="Patient participates in video consultation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Patient Receives Prescription -->
+        <mxCell id="patient-rx" value="Patient receives prescription explanation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2070" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== SAHAYAK SWIMLANE ACTIVITIES ========== -->
+
+        <!-- Sahayak Greets Patient -->
+        <mxCell id="sahayak-greet" value="Greets patient and initiates registration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak Registers Patient -->
+        <mxCell id="sahayak-register" value="Registers patient / Fetches ABHA ID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak Captures Vitals -->
+        <mxCell id="sahayak-vitals" value="Connects IoT devices and captures vitals" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak Records Audio -->
+        <mxCell id="sahayak-audio" value="Records patient symptom description (voice)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak Facilitates Video -->
+        <mxCell id="sahayak-facilitate" value="Facilitates video call and translates for patient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak Explains Prescription -->
+        <mxCell id="sahayak-explain" value="Explains prescription in local language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2070" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== KIOSK APPLICATION SWIMLANE ========== -->
+
+        <!-- Kiosk App Launch -->
+        <mxCell id="kiosk-launch" value="Kiosk App launches patient registration module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connect IoT -->
+        <mxCell id="kiosk-iot" value="Connect to IoT devices (BP, SpO2, Glucose)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Store Vitals Locally -->
+        <mxCell id="kiosk-store-vitals" value="Store vitals in Local Kiosk DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Send Audio to AI -->
+        <mxCell id="kiosk-send-audio" value="Send audio recording to AI Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Establish Video Call -->
+        <mxCell id="kiosk-video" value="Establish low-bandwidth video call (WebRTC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Display Prescription -->
+        <mxCell id="kiosk-display-rx" value="Display prescription in local language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2070" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Store Consultation Data -->
+        <mxCell id="kiosk-store-consultation" value="Store consultation, prescription, consent locally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#283593;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2240" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== CONSENT & IDENTITY SERVICE ========== -->
+
+        <!-- Fetch ABHA -->
+        <mxCell id="consent-abha" value="Query ABHA Registry for patient records" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="820" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Capture Consent -->
+        <mxCell id="consent-capture" value="Capture patient consent via OTP/Biometric" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="820" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Log Access -->
+        <mxCell id="consent-log" value="Log data access for DPDP compliance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="820" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== AI TRIAGE & TRANSLATION SERVICE ========== -->
+
+        <!-- Speech to Text -->
+        <mxCell id="ai-stt" value="Speech-to-Text (Multilingual)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE082;strokeColor=#F57C00;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="1000" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Translation -->
+        <mxCell id="ai-translate" value="Translate to English for doctor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE082;strokeColor=#F57C00;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="1000" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Medical NER -->
+        <mxCell id="ai-ner" value="Medical NER: Extract symptoms &amp; entities" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE082;strokeColor=#F57C00;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="1080" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Triage Scoring -->
+        <mxCell id="ai-triage" value="AI Triage: Severity Score &amp; Priority" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE082;strokeColor=#F57C00;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="1000" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Decision: Critical Case -->
+        <mxCell id="decision-critical" value="Is Case Critical?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#F57C00;strokeWidth=3;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="1080" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Hospital Referral -->
+        <mxCell id="ai-hospital" value="Generate Hospital Referral &amp; Alert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFAB91;strokeColor=#D84315;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="1090" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== DOCTOR PORTAL SWIMLANE ========== -->
+
+        <!-- Receive Summary -->
+        <mxCell id="doctor-receive" value="Receive AI summary, vitals, patient history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Doctor Reviews -->
+        <mxCell id="doctor-review" value="Review triage summary and patient vitals" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="1310" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Video Consultation -->
+        <mxCell id="doctor-video" value="Conduct video consultation with patient" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Doctor Diagnoses -->
+        <mxCell id="doctor-diagnose" value="Diagnose and determine treatment plan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Create Prescription -->
+        <mxCell id="doctor-create-rx" value="Create digital prescription with e-signature" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1810" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Schedule Follow-up -->
+        <mxCell id="doctor-followup" value="Schedule follow-up appointment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1810" y="1310" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== PRESCRIPTION & PHARMACY SWIMLANE ========== -->
+
+        <!-- Validate Prescription -->
+        <mxCell id="pharmacy-validate" value="Validate prescription and check drug interactions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1810" y="1480" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Generate e-Prescription -->
+        <mxCell id="pharmacy-generate" value="Generate multilingual e-prescription PDF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1970" y="1480" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Send to Pharmacy -->
+        <mxCell id="pharmacy-send" value="Send prescription to local pharmacy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1970" y="1570" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Check Availability -->
+        <mxCell id="pharmacy-check" value="Check medicine availability in inventory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2130" y="1480" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Schedule Delivery -->
+        <mxCell id="pharmacy-delivery" value="Schedule medicine delivery or pickup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2130" y="1570" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== OFFLINE SYNC & CLOUD EMR SWIMLANE ========== -->
+
+        <!-- Decision: Internet Available -->
+        <mxCell id="decision-internet" value="Is Internet Available?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#00695C;strokeWidth=3;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2240" y="1720" width="120" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Real-time Sync -->
+        <mxCell id="sync-realtime" value="Real-time sync to Cloud EMR (encrypted)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2400" y="1720" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Queue for Sync -->
+        <mxCell id="sync-queue" value="Queue data in Offline Sync Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2240" y="1830" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Wait for Connection -->
+        <mxCell id="sync-wait" value="Monitor connectivity and retry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2400" y="1830" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Sync to Cloud -->
+        <mxCell id="sync-cloud" value="Sync to Cloud EMR when online (Store &amp; Forward)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2400" y="1720" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- WhatsApp Notifications -->
+        <mxCell id="sync-whatsapp" value="Send follow-up reminders via WhatsApp Bot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00695C;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2070" y="1730" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- End Event -->
+        <mxCell id="end" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F44336;strokeColor=#C62828;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="2435" y="1870" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="end-label" value="END" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2430" y="1925" width="60" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ========== DATA STORES ========== -->
+
+        <!-- Local Kiosk DB -->
+        <mxCell id="datastore-local" value="Local Kiosk DB&#xa;(IndexedDB/SQLite)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="780" y="620" width="100" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Cloud EMR -->
+        <mxCell id="datastore-cloud" value="Cloud EMR&#xa;(PostgreSQL + S3)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#90CAF9;strokeColor=#0D47A1;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2400" y="1620" width="100" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ABHA Registry -->
+        <mxCell id="external-abha" value="ABHA Registry&#xa;(External API)" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="820" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- AI Services Cloud -->
+        <mxCell id="external-ai" value="AI Services&#xa;(Google/Azure)" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFF9C4;strokeColor=#F57C00;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="1000" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Pharmacy System -->
+        <mxCell id="external-pharmacy" value="Pharmacy System&#xa;(External)" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="2270" y="1480" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- WhatsApp API -->
+        <mxCell id="external-whatsapp" value="WhatsApp API&#xa;(Twilio)" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#AED581;strokeColor=#558B2F;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1930" y="1730" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ========== SECURITY ANNOTATIONS ========== -->
+
+        <!-- Encryption Box -->
+        <mxCell id="security-encryption" value="🔒 TLS 1.3 Encryption" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="580" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- RBAC Box -->
+        <mxCell id="security-rbac" value="🔐 RBAC + Audit Logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1600" y="820" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- DPDP Compliance -->
+        <mxCell id="security-dpdp" value="✓ DPDP Act Compliant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="820" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ========== CONNECTIONS / FLOWS ========== -->
+
+        <!-- Start to Patient Arrives -->
+        <mxCell id="flow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="start" target="patient-arrives">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Patient to Sahayak -->
+        <mxCell id="flow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="patient-arrives" target="sahayak-greet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak to Register -->
+        <mxCell id="flow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-greet" target="sahayak-register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Register to Kiosk App -->
+        <mxCell id="flow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-register" target="kiosk-launch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Kiosk to Consent Service -->
+        <mxCell id="flow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#E65100;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="kiosk-launch" target="consent-abha">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ABHA Query -->
+        <mxCell id="flow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#E65100;endArrow=classic;endFill=1;" edge="1" parent="1" source="consent-abha" target="consent-capture">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Consent back to Kiosk -->
+        <mxCell id="flow7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#E65100;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="consent-capture" target="kiosk-iot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="750" />
+              <mxPoint x="700" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sahayak Captures Vitals -->
+        <mxCell id="flow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-register" target="sahayak-vitals">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="460" />
+              <mxPoint x="700" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Kiosk IoT Connection -->
+        <mxCell id="flow9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-vitals" target="kiosk-iot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Store Vitals -->
+        <mxCell id="flow10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-iot" target="kiosk-store-vitals">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Vitals to Local DB -->
+        <mxCell id="flow11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="kiosk-store-vitals" target="datastore-local">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Patient Symptoms -->
+        <mxCell id="flow12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-store-vitals" target="patient-symptoms">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="760" />
+              <mxPoint x="860" y="760" />
+              <mxPoint x="860" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sahayak Records Audio -->
+        <mxCell id="flow13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="patient-symptoms" target="sahayak-audio">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Audio to Kiosk -->
+        <mxCell id="flow14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-audio" target="kiosk-send-audio">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="460" />
+              <mxPoint x="1020" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Kiosk to AI Service -->
+        <mxCell id="flow15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="kiosk-send-audio" target="ai-stt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AI STT -->
+        <mxCell id="flow16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;endArrow=classic;endFill=1;" edge="1" parent="1" source="ai-stt" target="ai-translate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AI Translation -->
+        <mxCell id="flow17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;endArrow=classic;endFill=1;" edge="1" parent="1" source="ai-translate" target="ai-ner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AI NER to Triage -->
+        <mxCell id="flow18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;endArrow=classic;endFill=1;" edge="1" parent="1" source="ai-ner" target="ai-triage">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="1140" />
+              <mxPoint x="1170" y="1030" />
+              <mxPoint x="1320" y="1030" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Triage to Decision -->
+        <mxCell id="flow19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;endArrow=classic;endFill=1;" edge="1" parent="1" source="ai-triage" target="decision-critical">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Critical - Yes -->
+        <mxCell id="flow20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#D84315;endArrow=classic;endFill=1;" edge="1" parent="1" source="decision-critical" target="ai-hospital">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-critical-yes" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#D84315;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="1100" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Critical - No (Continue) -->
+        <mxCell id="flow21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="decision-critical" target="consent-log">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1320" y="900" />
+              <mxPoint x="1390" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-critical-no" value="NO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="1000" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- AI to Doctor Portal -->
+        <mxCell id="flow22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="consent-log" target="doctor-receive">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1390" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Doctor Reviews -->
+        <mxCell id="flow23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;" edge="1" parent="1" source="doctor-receive" target="doctor-review">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Establish Video Call -->
+        <mxCell id="flow24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;" edge="1" parent="1" source="doctor-receive" target="doctor-video">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1390" y="1200" />
+              <mxPoint x="1550" y="1200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Video Call - Kiosk Side -->
+        <mxCell id="flow25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#283593;endArrow=classic;endFill=1;dashed=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="kiosk-video" target="doctor-video">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Video Call - Patient & Sahayak -->
+        <mxCell id="flow26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-send-audio" target="kiosk-video">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020" y="560" />
+              <mxPoint x="1550" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sahayak Facilitates -->
+        <mxCell id="flow27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-video" target="sahayak-facilitate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Patient in Video -->
+        <mxCell id="flow28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-facilitate" target="patient-video">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Doctor Diagnoses -->
+        <mxCell id="flow29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;" edge="1" parent="1" source="doctor-video" target="doctor-diagnose">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Create Prescription -->
+        <mxCell id="flow30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;" edge="1" parent="1" source="doctor-diagnose" target="doctor-create-rx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Schedule Follow-up -->
+        <mxCell id="flow31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#6A1B9A;endArrow=classic;endFill=1;" edge="1" parent="1" source="doctor-create-rx" target="doctor-followup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Prescription to Pharmacy -->
+        <mxCell id="flow32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="doctor-create-rx" target="pharmacy-validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Validate to Generate -->
+        <mxCell id="flow33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="pharmacy-validate" target="pharmacy-generate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Generate to Send -->
+        <mxCell id="flow34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="pharmacy-generate" target="pharmacy-send">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Send to Check Availability -->
+        <mxCell id="flow35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="pharmacy-generate" target="pharmacy-check">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2030" y="1460" />
+              <mxPoint x="2190" y="1460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Check to Delivery -->
+        <mxCell id="flow36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="pharmacy-check" target="pharmacy-delivery">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Prescription to Kiosk Display -->
+        <mxCell id="flow37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#283593;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="pharmacy-generate" target="kiosk-display-rx">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2030" y="1460" />
+              <mxPoint x="2130" y="1460" />
+              <mxPoint x="2130" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Kiosk Display to Sahayak -->
+        <mxCell id="flow38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-display-rx" target="sahayak-explain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sahayak to Patient -->
+        <mxCell id="flow39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sahayak-explain" target="patient-rx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Store Consultation -->
+        <mxCell id="flow40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#283593;endArrow=classic;endFill=1;" edge="1" parent="1" source="kiosk-display-rx" target="kiosk-store-consultation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Store to Sync Decision -->
+        <mxCell id="flow41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00695C;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="kiosk-store-consultation" target="decision-internet">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2300" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision Internet - Yes -->
+        <mxCell id="flow42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2E7D32;endArrow=classic;endFill=1;" edge="1" parent="1" source="decision-internet" target="sync-realtime">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-internet-yes" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="2370" y="1730" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Decision Internet - No -->
+        <mxCell id="flow43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#D84315;endArrow=classic;endFill=1;" edge="1" parent="1" source="decision-internet" target="sync-queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-internet-no" value="NO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#D84315;" vertex="1" parent="1">
+          <mxGeometry x="2300" y="1800" width="40" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Queue to Wait -->
+        <mxCell id="flow44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00695C;endArrow=classic;endFill=1;" edge="1" parent="1" source="sync-queue" target="sync-wait">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Wait to Cloud Sync -->
+        <mxCell id="flow45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00695C;endArrow=classic;endFill=1;" edge="1" parent="1" source="sync-wait" target="sync-cloud">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2460" y="1810" />
+              <mxPoint x="2460" y="1780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Sync to Cloud EMR -->
+        <mxCell id="flow46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0D47A1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="sync-realtime" target="datastore-cloud">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2460" y="1700" />
+              <mxPoint x="2450" y="1700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- WhatsApp Notification -->
+        <mxCell id="flow47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#558B2F;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="pharmacy-delivery" target="sync-whatsapp">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2190" y="1650" />
+              <mxPoint x="2130" y="1650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- WhatsApp to End -->
+        <mxCell id="flow48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#424242;endArrow=classic;endFill=1;" edge="1" parent="1" source="sync-cloud" target="end">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2460" y="1895" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ========== LEGEND ========== -->
+        <mxCell id="legend-bg" value="LEGEND" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#424242;verticalAlign=top;fontSize=14;fontStyle=1;strokeWidth=2;align=left;" vertex="1" parent="1">
+          <mxGeometry x="80" y="2000" width="500" height="220" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-action" value="Process / Action" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="100" y="2040" width="120" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-decision" value="Decision Point" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#F57C00;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="100" y="2085" width="120" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-datastore" value="Data Store" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="100" y="2140" width="80" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-external" value="External System" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="2040" width="120" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-sync-flow" value="Synchronous Flow" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#424242;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="2105" as="sourcePoint" />
+            <mxPoint x="370" y="2105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="legend-async-flow" value="Async / API Call" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#1565C0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="2160" as="sourcePoint" />
+            <mxPoint x="370" y="2160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="legend-security" value="🔒 Security / Encryption" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="2040" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-compliance" value="✓ DPDP Compliance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="2085" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ========== KEY NOTES ========== -->
+        <mxCell id="notes-bg" value="KEY ARCHITECTURAL NOTES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;verticalAlign=top;fontSize=14;fontStyle=1;strokeWidth=2;align=left;" vertex="1" parent="1">
+          <mxGeometry x="620" y="2000" width="500" height="220" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note1" value="• All data flows are encrypted using TLS 1.3" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2040" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note2" value="• RBAC enforced at all service boundaries with audit logging" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2065" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note3" value="• Offline-first: All critical data stored locally before sync" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2090" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note4" value="• Patient consent required before any data access/sharing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2115" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note5" value="• WebRTC video optimized for 256kbps-1Mbps bandwidth" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2140" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note6" value="• AI services provide 90%+ accuracy for Indian languages" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2165" width="470" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note7" value="• WhatsApp reminders sent in patient's local language" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="635" y="2190" width="470" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
