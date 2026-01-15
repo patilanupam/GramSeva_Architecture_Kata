@@ -1,8 +1,41 @@
-# GramSeva Health - Complete Architecture Documentation
+# GramSeva Health - Architecture Documentation
+
+## 📋 Quick Navigation
+- [Architecture Overview](#architecture-overview)
+- [Data Flow](#data-flow-architecture)
+- [System Components](#system-components-architecture)
+- [Detailed Documentation](docs/)
+  - [Architecture Details](docs/ARCHITECTURE.md)
+  - [Business Perspective](docs/BUSINESS_PERSPECTIVE.md)
+  - [Design Patterns](docs/DESIGN_PATTERNS_SUMMARY.md)
+  - [Features](docs/FEATURES.md)
+  - [Requirements](docs/KEY_REQUIREMENTS.md)
+
+---
 
 ## Executive Summary
 
-GramSeva Health is a "Phygital" (Physical + Digital) healthcare platform designed to bridge the healthcare gap between rural patients and city-based medical specialists. The system enables assisted tele-consultations through local Health Kiosks operated by trained intermediaries called Sahayaks, eliminating unnecessary travel for rural patients while ensuring quality healthcare delivery.
+GramSeva Health is a **"Phygital"** (Physical + Digital) healthcare platform designed to bridge the healthcare gap between rural patients and city-based medical specialists. The system enables assisted tele-consultations through local Health Kiosks operated by trained intermediaries called **Sahayaks**, eliminating unnecessary travel for rural patients while ensuring quality healthcare delivery.
+
+### Key Metrics
+- 🎯 **Target**: 10,000+ kiosks across rural India
+- 👥 **Users**: Patients, Sahayaks, Doctors, Pharmacists, Admins
+- 🌐 **Languages**: 15+ Indian regional languages
+- 📱 **Offline-First**: Works with intermittent connectivity
+- 🔒 **Compliance**: DPDP Act, ABDM standards
+
+---
+
+## Architecture Overview
+
+### High-Level Design
+![HLD Diagram](draw_io_diagrams/HLD_gram_seva.png)
+
+### System Design
+![Design Diagram](draw_io_diagrams/Design_Diagram.drawio.png)
+
+### Implementation Flow
+![Implementation Flow](draw_io_diagrams/implementation_flow.png)
 
 ---
 
@@ -26,15 +59,44 @@ Rural patients lack access to quality healthcare specialists, forcing them to tr
 
 ---
 
-## 2. High-Level Architecture Overview
+## 2. Data Flow Architecture
+
+### End-to-End Consultation Flow
+
+![Data Flow Diagram](draw_io_diagrams/create%20a%20data%20floow%20based%20on%20below%20logic%20ddiagram.png)
+
+### Key Data Flow Stages
+
+1. **Patient Registration** → Kiosk captures demographics and ABHA ID
+2. **Vitals Collection** → IoT devices sync real-time health data
+3. **Symptom Capture** → Voice/text recording in local language
+4. **AI Triage** → ML model analyzes symptoms and assigns priority
+5. **Video Consultation** → WebRTC connection between Sahayak/Patient and Doctor
+6. **Prescription Generation** → Doctor creates multilingual digital prescription
+7. **Pharmacy Integration** → Auto-forwarded to local pharmacy
+8. **Follow-up Scheduling** → Appointment booking for chronic care
+
+### Offline-First Sync Mechanism
+
+![Data Flow 2](draw_io_diagrams/create%20a%20data%20floow%20based%20on%20below%20logic%20ddiagram%20(1).png)
+
+**Sync Strategy:**
+- Local IndexedDB stores consultation data
+- Background sync when connectivity available
+- Priority queue: Critical vitals > Prescriptions > Symptom recordings
+- Conflict resolution using last-write-wins with timestamp
+
+---
+
+## 3. High-Level Architecture Overview
 
 ### 2.1 Architecture Principles
 - **Offline-First Design**: Must function with intermittent internet connectivity
-- **Low-Bandwidth Optimization**: Optimized for rural network conditions
+- **Low-Bandwidth Optimization**: Optimized for rural network conditions (adaptive bitrate 256kbps-1Mbps)
 - **Multilingual Support**: Support for local dialects and regional languages
 - **Privacy by Design**: DPDP Act compliance with explicit consent management
 - **Scalability**: Handle growing network of kiosks and consultations
-- **Interoperability**: Integration with government health systems and local pharmacies
+- **Interoperability**: Integration with government health systems (ABHA, CoWIN) and local pharmacies
 
 ### 2.2 Architecture Style
 **Hybrid Architecture**: Microservices-based cloud backend with edge computing capabilities at kiosk locations
@@ -46,158 +108,402 @@ Rural patients lack access to quality healthcare specialists, forcing them to tr
 - CQRS for read/write optimization
 - Circuit Breaker for external integrations
 
+### 2.3 Component Interaction Diagram
+
+![Component Interaction](draw_io_diagrams/create%20a%20data%20floow%20based%20on%20below%20logic%20ddiagram%20(2).png)
+
 ---
 
-## 3. System Components Architecture
+## Technology Stack Overview
 
-### 3.1 Frontend Layer
+### Frontend Technologies
+```
+┌─────────────────────────────────────────────────────┐
+│  Kiosk App: React/Vue.js + PWA + WebRTC            │
+│  Doctor Portal: React/Angular SPA                   │
+│  Admin Portal: React + Dashboard Framework          │
+│  Offline: IndexedDB + Service Workers + Workbox    │
+└─────────────────────────────────────────────────────┘
+```
 
-#### 3.1.1 Kiosk Application (Sahayak Interface)
-**Technology Stack:**
-- Progressive Web App (PWA) or Electron-based desktop app
-- React/Vue.js with offline-first libraries (Workbox, IndexedDB)
-- WebRTC for video consultation
-- Service Workers for background sync
+### Backend Services
+```
+┌─────────────────────────────────────────────────────┐
+│  Languages: Node.js, Python, Java Spring Boot       │
+│  API Gateway: Kong/AWS API Gateway                  │
+│  Message Queue: Apache Kafka + RabbitMQ             │
+│  Cache: Redis                                       │
+│  WebRTC: Janus Gateway/Mediasoup                   │
+└─────────────────────────────────────────────────────┘
+```
 
-**Detailed Implementation Steps:**
+### Data & Storage
+```
+┌─────────────────────────────────────────────────────┐
+│  RDBMS: PostgreSQL (User, Consultation, Rx)        │
+│  NoSQL: MongoDB (Documents, Unstructured)          │
+│  Storage: AWS S3/MinIO (Media, Videos, PDFs)       │
+│  Search: Elasticsearch (Medical Records)           │
+│  Analytics: ClickHouse + Apache Superset           │
+└─────────────────────────────────────────────────────┘
+```
 
-**Step 1: Patient Registration Module**
-- Capture patient demographics (name, age, gender, contact)
-- Support for Aadhaar/ABHA ID integration
-- Photo capture capability
-- Offline storage in IndexedDB
-- Sync queue for uploading when online
+### AI/ML & Integration
+```
+┌─────────────────────────────────────────────────────┐
+│  NLP: Google Speech-to-Text, BioBERT, GPT-4        │
+│  ML: TensorFlow/PyTorch (Triage Models)            │
+│  ABHA: Government Health Stack Integration         │
+│  Pharmacy: WhatsApp Business API                   │
+└─────────────────────────────────────────────────────┘
+```
 
-**Step 2: IoT Device Integration**
-- Serial/Bluetooth communication with medical devices
-  - BP Monitor (Blood Pressure)
-  - Pulse Oximeter (SpO2)
-  - Glucometer (Blood Glucose)
-  - Thermometer
-- Real-time vitals display
-- Data validation and range checking
-- Automatic logging with timestamps
+---
 
-**Step 3: Symptom Capture Interface**
-- Voice recording in local dialect (60-120 seconds)
-- Text-based symptom checklist (translated)
-- Body diagram for pain/issue location marking
-- Medical history questionnaire
-- Upload previous medical records/prescriptions (photos)
+## 4. System Components Architecture
 
-**Step 4: Video Consultation Interface**
-- WebRTC-based video call optimized for low bandwidth
-  - Adaptive bitrate (256kbps to 1Mbps)
-  - Audio priority over video
-  - Option to turn off video and use audio-only
-- Split screen: Doctor view + Patient vitals panel
-- Real-time chat for text communication
-- Screen sharing for viewing test reports
+### Components Overview
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     FRONTEND LAYER                           │
+├─────────────────────────────────────────────────────────────┤
+│  • Kiosk App (PWA) - Patient Registration + IoT Integration │
+│  • Doctor Portal - Consultation Dashboard + Prescription    │
+│  • Admin Portal - Analytics + Kiosk Management              │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                   API GATEWAY (Kong)                         │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  MICROSERVICES LAYER                         │
+├─────────────────────────────────────────────────────────────┤
+│  [User Mgmt] [Patient Mgmt] [Consultation] [AI/NLP]        │
+│  [Prescription] [Notification] [Analytics] [Sync Service]   │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                      DATA LAYER                              │
+├─────────────────────────────────────────────────────────────┤
+│  [PostgreSQL] [MongoDB] [Redis] [S3] [Elasticsearch]       │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                 EXTERNAL INTEGRATIONS                        │
+├─────────────────────────────────────────────────────────────┤
+│  • ABHA (Health Records)  • Payment Gateway                 │
+│  • Pharmacy APIs          • SMS/WhatsApp                    │
+│  • Government Systems     • IoT Device Protocols            │
+└─────────────────────────────────────────────────────────────┘
+```
 
-**Step 5: Prescription Reception & Explanation**
-- Digital prescription display in local language
-- Text-to-speech for prescription reading
-- Medicine images and dosage instructions
-- Automatic forwarding to local pharmacy
-- Downloadable/printable PDF
+> 📚 **For detailed implementation steps**, refer to the [complete architecture documentation](docs/ARCHITECTURE.md)
 
-**Step 6: Offline Sync Management**
-- Local SQLite/IndexedDB database
-- Sync queue with priority levels
-- Background sync when connectivity restored
-- Conflict resolution strategies
-- Sync status indicators
+### 4.1 Frontend Layer - Key Features
 
-#### 3.1.2 Doctor Dashboard (Web Application)
-**Technology Stack:**
-- React/Angular SPA
-- WebRTC for video calls
-- Real-time updates via WebSocket
+#### 4.1.1 Kiosk Application (Sahayak Interface)
+**Tech Stack:** PWA, React/Vue.js, WebRTC, IndexedDB, Service Workers
 
-**Detailed Implementation Steps:**
+**Core Modules:**
+1. **Patient Registration** - ABHA ID integration, offline-capable
+2. **IoT Device Integration** - BP, SpO2, Glucose monitors via Bluetooth
+3. **Symptom Capture** - Voice (60-120s) in local dialect + text checklist
+4. **Video Consultation** - WebRTC (256kbps-1Mbps adaptive)
+5. **Prescription Display** - Multilingual with text-to-speech
+6. **Offline Sync** - Priority queue with background sync
 
-**Step 1: Consultation Queue Management**
-- Pending consultation list with patient details
-- Priority-based sorting (severity score from AI triage)
-- Appointment scheduling calendar
-- Filter by specialization, location, time slots
-- Estimated wait time display
+#### 4.1.2 Doctor Dashboard
+**Tech Stack:** React/Angular SPA, WebRTC, WebSocket
 
-**Step 2: Patient Information Dashboard**
-- Patient demographics and medical history
-- Real-time vitals display (from IoT devices)
-- AI-generated symptom summary in English
-- Previous consultation records
-- Uploaded medical documents viewer
+**Core Features:**
+- **Queue Management** - AI-prioritized patient list
+- **Patient Info** - Real-time vitals + AI-generated summary
+- **Video Consultation** - HD calls with annotation tools
+- **Prescription Generator** - Drug database with interaction checker
+- **Follow-up Scheduling** - Chronic care management
 
-**Step 3: Video Consultation Interface**
-- HD video call interface (if bandwidth permits)
-- Picture-in-picture mode
-- Recording capability (with consent)
-- Annotation tools for marking issues
-- Integration with diagnostic image viewers
-
-**Step 4: Digital Prescription Generator**
-- Medicine search with autocomplete (drug database)
-- Dosage calculator based on weight/age
-- Drug interaction checker
-- Template library for common prescriptions
-- E-signature integration
-- Multi-language prescription generation
-
-**Step 5: Follow-up Scheduling**
-- Schedule next appointment
-- Set reminders for patient
-- Tag chronic condition monitoring cases
-- Care plan documentation
-
-#### 3.1.3 Admin Portal
-**Features:**
-- Kiosk management (registration, status monitoring)
-- Sahayak onboarding and training tracking
-- Doctor panel management
+#### 4.1.3 Admin Portal
+- Kiosk & Sahayak management
+- Doctor panel onboarding
 - Analytics dashboards
-- Audit logs and compliance reports
-- System configuration management
+- Audit logs & compliance reports
 
-### 3.2 Backend Services Layer (Microservices)
+---
 
-#### 3.2.1 User Management Service
-**Responsibilities:** Authentication, authorization, user profiles, role management
+### 4.2 Backend Microservices
 
-**Detailed Implementation Steps:**
+> 📖 **Detailed implementation steps** available in [Architecture Documentation](docs/ARCHITECTURE.md)
 
-**Step 1: Authentication System**
-- Multi-factor authentication (OTP + Biometric)
-- JWT-based token management
-- Session management with Redis
-- Password hashing (bcrypt/Argon2)
-- OAuth 2.0 for third-party integrations
+| Service | Responsibility | Tech Stack |
+|---------|---------------|------------|
+| **User Management** | Auth, RBAC, Profiles | Node.js, PostgreSQL, Redis, JWT |
+| **Patient Management** | EHR, ABHA Integration | Spring Boot, PostgreSQL, MongoDB |
+| **Consultation Service** | Video calls, Sessions | Node.js, WebRTC, Kafka |
+| **AI/NLP Service** | STT, Translation, Triage | Python, TensorFlow, BioBERT |
+| **Prescription Service** | Rx generation, Pharmacy | Node.js, PostgreSQL, WhatsApp API |
+| **Notification Service** | SMS, Email, WhatsApp | Node.js, Twilio, Firebase |
+| **Analytics Service** | Reports, Dashboards | Python, ClickHouse, Superset |
+| **Offline Sync Service** | Delta sync, Conflict resolution | Node.js, Redis, PostgreSQL |
 
-**Step 2: Role-Based Access Control (RBAC)**
-- Define roles: Patient, Sahayak, Doctor, Pharmacist, Admin
-- Permission matrix per role
-- Row-level security for data access
-- Audit trail for all access attempts
-- Time-based access controls
+---
 
-**Step 3: User Profile Management**
-- CRUD operations for user profiles
-- Profile verification workflows
-- Document upload and verification
-- Profile picture management
-- Notification preferences
+### 4.3 Data Architecture
 
-**Technology Stack:**
-- Node.js/Spring Boot
-- PostgreSQL for user data
-- Redis for session management
-- Keycloak/Auth0 for identity management (optional)
+#### Database Strategy
+```
+PostgreSQL (RDBMS)           MongoDB (NoSQL)           S3/MinIO (Object Store)
+├── Users & Auth             ├── Patient Documents     ├── Medical Images
+├── Patients & EHR           ├── Consultation Trans.   ├── Video Recordings
+├── Consultations            ├── Training Data         ├── Prescription PDFs
+├── Prescriptions            └── Unstructured Data     └── Backups
+└── Audit Logs
 
-#### 3.2.2 Patient Management Service
-**Responsibilities:** Patient records, medical history, ABHA integration
+Redis (Cache)                Elasticsearch             Kafka (Event Stream)
+├── Sessions                 ├── Medical Records       ├── Consultation Events
+├── Real-time Vitals         ├── Search Index          ├── Notification Queue
+└── Sync Queue               └── Full-text Search      └── Analytics Pipeline
+```
 
-**Detailed Implementation Steps:**
+---
+
+## 5. Key Workflows
+
+### Workflow 1: Complete Consultation Journey
+
+```
+Patient Arrival → Sahayak Login → Patient Registration/Lookup
+        ↓
+IoT Device Connection → Vitals Capture (BP, SpO2, Temp, Glucose)
+        ↓
+Symptom Recording (Voice in local language) → Text Checklist
+        ↓
+AI Processing (STT → Translation → NER → Triage Score)
+        ↓
+Doctor Queue Assignment (Priority-based) → Notification
+        ↓
+Video Consultation Start (WebRTC) → Real-time Vitals Display
+        ↓
+Doctor Diagnosis → Digital Prescription (Multilingual)
+        ↓
+Prescription to Pharmacy (WhatsApp) + Patient (SMS/Print)
+        ↓
+Follow-up Scheduled (if chronic) → Payment Collection
+        ↓
+Consultation Close → Data Sync to Cloud → Analytics Update
+```
+
+### Workflow 2: Offline Consultation Sync
+
+```
+Offline Mode Active → Patient Data Stored in IndexedDB
+        ↓
+Vitals + Symptoms + Photos Queued Locally
+        ↓
+Network Detection → Connectivity Restored
+        ↓
+Background Sync Triggered → Priority Queue Processing
+        ↓
+Critical Vitals First → Prescriptions → Media Files
+        ↓
+Conflict Detection → Timestamp-based Resolution
+        ↓
+Sync Complete → Local Data Marked as Synced
+```
+
+---
+
+## 6. Security & Compliance
+
+### Data Privacy (DPDP Act Compliance)
+- ✅ Explicit consent for data collection, storage, sharing
+- ✅ Purpose limitation (consultation, analytics, research)
+- ✅ Data minimization (collect only necessary info)
+- ✅ Right to access, correction, deletion
+- ✅ Consent withdrawal mechanism
+- ✅ Breach notification within 72 hours
+
+### Security Measures
+```
+┌────────────────────────────────────────────────────┐
+│ Transport Layer    │ TLS 1.3 encryption           │
+├────────────────────────────────────────────────────┤
+│ Application Layer  │ JWT tokens, API rate limiting│
+├────────────────────────────────────────────────────┤
+│ Data Layer         │ AES-256 at rest encryption   │
+├────────────────────────────────────────────────────┤
+│ Network Layer      │ VPC, Security Groups, WAF    │
+├────────────────────────────────────────────────────┤
+│ Access Control     │ RBAC, MFA, Session timeout   │
+└────────────────────────────────────────────────────┘
+```
+
+### Compliance Standards
+- 🏥 **ABDM (Ayushman Bharat Digital Mission)** - Health data exchange standards
+- 🔒 **DPDP Act 2023** - Personal data protection
+- 📋 **HL7 FHIR** - Health information interoperability
+- 🌐 **HIPAA-like practices** - Privacy & security best practices
+
+---
+
+## 7. Scalability & Performance
+
+### Performance Targets
+| Metric | Target | Strategy |
+|--------|--------|----------|
+| **API Response Time** | < 200ms (P95) | Redis caching, CDN |
+| **Video Call Latency** | < 150ms | Regional TURN servers |
+| **Offline Sync** | < 30s for critical data | Priority queue |
+| **Concurrent Users** | 100K+ | Horizontal scaling |
+| **Database Queries** | < 50ms | Indexing, partitioning |
+| **Uptime** | 99.9% | Multi-region deployment |
+
+### Scaling Strategy
+```
+Horizontal Scaling              Load Balancing           Auto-Scaling
+├── Stateless services          ├── NGINX/HAProxy       ├── Kubernetes HPA
+├── Database read replicas      ├── Round-robin DNS     ├── AWS Auto Scaling
+├── Kafka partitioning          └── Health checks       └── Metric-based scaling
+└── S3 multi-region
+```
+
+---
+
+## 8. Deployment Architecture
+
+### Cloud Infrastructure (AWS/Azure/GCP)
+```
+┌─────────────────────────────────────────────────────┐
+│              Multi-Region Deployment                 │
+├─────────────────────────────────────────────────────┤
+│  Region 1 (Primary)      │  Region 2 (DR)           │
+│  ├── EKS/AKS Cluster     │  ├── Standby Cluster     │
+│  ├── RDS PostgreSQL      │  ├── Read Replica        │
+│  ├── ElastiCache Redis   │  ├── Redis Replica       │
+│  └── S3 Bucket           │  └── S3 Cross-region rep │
+└─────────────────────────────────────────────────────┘
+         ↓                          ↓
+    CloudFront CDN          Route 53 (Failover)
+```
+
+### Container Orchestration (Kubernetes)
+- **Services**: Each microservice as separate deployment
+- **Auto-scaling**: HPA based on CPU/Memory
+- **Service Mesh**: Istio for traffic management
+- **Monitoring**: Prometheus + Grafana
+- **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana)
+
+---
+
+## 9. Monitoring & Observability
+
+### Monitoring Stack
+```
+Application Metrics (Prometheus)
+├── API request rates
+├── Error rates (4xx, 5xx)
+├── Response times (P50, P95, P99)
+└── Service dependencies
+
+Infrastructure Metrics (CloudWatch/Azure Monitor)
+├── CPU, Memory, Disk usage
+├── Network throughput
+└── Database connections
+
+Business Metrics (Custom Dashboards)
+├── Consultations per day
+├── Average wait time
+├── Prescription fulfillment rate
+└── Patient satisfaction scores
+```
+
+### Alerts & Incident Response
+- 🚨 **Critical**: Page on-call engineer (API down, DB failure)
+- ⚠️ **Warning**: Slack notification (high latency, errors)
+- 📊 **Info**: Email digest (daily metrics summary)
+
+---
+
+## 10. Future Enhancements
+
+### Phase 2 (6-12 months)
+- 🤖 **AI Symptom Checker** - Chatbot for preliminary diagnosis
+- 📱 **Mobile App** - Direct patient access (post-consultation)
+- 🏥 **Hospital Integration** - Referral management to tertiary care
+- 💊 **Medicine Delivery** - Integration with e-pharmacy platforms
+
+### Phase 3 (12-24 months)
+- 🧬 **Lab Integration** - Sample collection at kiosks
+- 🩺 **Remote Monitoring** - Home IoT devices for chronic patients
+- 📊 **Predictive Analytics** - Disease outbreak detection
+- 🌍 **International Expansion** - Africa, Southeast Asia markets
+
+---
+
+## 📚 Additional Resources
+
+### Documentation
+- 📖 [Complete Architecture Document](docs/ARCHITECTURE.md) - Detailed implementation guide
+- 💼 [Business Perspective](docs/BUSINESS_PERSPECTIVE.md) - Business context and stakeholders
+- 🎨 [Design Patterns](docs/DESIGN_PATTERNS_SUMMARY.md) - Architecture patterns used
+- ✨ [Features Breakdown](docs/FEATURES.md) - Feature-wise implementation
+- 📋 [Requirements](docs/KEY_REQUIREMENTS.md) - Functional & non-functional requirements
+
+### Diagrams
+- 🗂️ [Data Flow Diagrams](draw_io_diagrams/) - Visual data flow representations
+- 🏗️ [Architecture Diagrams](draw_io_diagrams/) - High-level and detailed designs
+
+---
+
+## API Quick Reference
+
+### Core Endpoints
+
+**Authentication**
+- `POST /api/v1/auth/login` - User login
+- `POST /api/v1/auth/refresh` - Refresh JWT token
+- `POST /api/v1/auth/mfa/verify` - MFA verification
+
+**Patient Management**
+- `POST /api/v1/patients` - Register new patient
+- `GET /api/v1/patients/{id}` - Get patient details
+- `GET /api/v1/patients/{id}/history` - Medical history
+- `POST /api/v1/patients/{id}/consent` - Record consent
+
+**Consultation**
+- `POST /api/v1/consultations` - Create consultation
+- `POST /api/v1/consultations/{id}/vitals` - Upload vitals
+- `POST /api/v1/consultations/{id}/symptoms` - Upload symptoms
+- `GET /api/v1/consultations/{id}/triage` - Get AI triage
+
+**Prescription**
+- `POST /api/v1/prescriptions` - Create prescription
+- `GET /api/v1/prescriptions/{id}/pdf` - Download PDF
+- `POST /api/v1/prescriptions/{id}/fulfill` - Send to pharmacy
+
+---
+
+## ⚙️ Implementation Guide
+
+For detailed implementation steps including:
+- Microservices architecture details
+- Database schemas and data models
+- Infrastructure setup and deployment
+- Security configurations
+- Performance tuning
+
+**Please refer to**: [Complete Architecture Documentation](docs/ARCHITECTURE.md)
+
+---
+
+**Document Version**: 1.0  
+**Last Updated**: January 15, 2026  
+**Repository**: [github.com/patilanupam/GramSeva_Architecture_Kata](https://github.com/patilanupam/GramSeva_Architecture_Kata)  
+**Status**: Ready for Review
+
+---
+
+### Appendix: Legacy Implementation Notes
 
 **Step 1: Patient Registration**
 - Create patient records with unique IDs
