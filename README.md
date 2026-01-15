@@ -78,7 +78,6 @@ Rural patients lack access to quality healthcare specialists, forcing them to tr
 
 ### Offline-First Sync Mechanism
 
-![Data Flow 2](draw_io_diagrams/create%20a%20data%20floow%20based%20on%20below%20logic%20ddiagram%20(1).png)
 
 **Sync Strategy:**
 - Local IndexedDB stores consultation data
@@ -110,7 +109,6 @@ Rural patients lack access to quality healthcare specialists, forcing them to tr
 
 ### 2.3 Component Interaction Diagram
 
-![Component Interaction](draw_io_diagrams/create%20a%20data%20floow%20based%20on%20below%20logic%20ddiagram%20(2).png)
 
 ---
 
